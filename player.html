@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>cinema6 player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css" media="screen">
+		html, body { height:100%; background-color: #606060;}
+		body { margin:0; padding:0; overflow:hidden; }
+		</style>
+	</head>
+	<body>
+		<div id="flashContent">
+		</div>
+		
+		<div id="compBanner">
+		</div>
+	</body>
+	<script src="cinema6player.js"></script>
+	<script>
+		cinema6player.setup({
+		playerDiv: 'flashContent',	//div where you want the player to be rendered in
+		bannerDiv: 'compBanner', 	//div where you want the companion banner to be rendered in
+		playerId: 'myplayerId',		//player id
+		swf: 'player.swf',			//location of the swf file
+		width: 640,					//width of the video player
+		height: 360,				//height of the video player
+		params: {
+			videoDesc: "video desc", 
+			videoDuration:'150',
+			videoId: '12345',
+			keywords: 'test video',
+			videoTitle: "test video title"
+		},
+		adXmlUrl:
+		"http://u-ads.adap.tv/a/h/AiVnje_CA3BJsRMP0_gPXAtRyCRFRZSd?cb=[CACHE_BREAKER]&pageUrl=http%3A%2F%2Ftribal360.com&description=[params.videoDesc]&duration=[params.videoDuration]&id=[params.videoId]&keywords=[params.keywords]&title=[params.videoTitle]&url=VIDEO_URL&eov=eov"
+	});
+	
+	var test;
+	window.addEventListener('message', function(message) {
+		var obj = eval("(" + message.data + ')');
+	
+		if (obj.__vpaid__.type == "onAdResponse"){
+			cinema6player.loadAd();
+		}if (obj.__vpaid__.type == "AdLoaded"){
+			console.log("________________ad loaded");
+			//cinema6player.startAd();
+		}else{
+		}
+	});
+
+	</script>
+</html>
