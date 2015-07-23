@@ -65,13 +65,15 @@
 					}
 				}
 
-				for each (var clickTracking:XML in creative.VideoClicks.ClickTracking)
-				{
-					var clickTrackingUrl:String = clickTracking.text();
+				if (creative && creative.VideoClicks) {
+					for each (var clickTracking:XML in creative.VideoClicks.ClickTracking)
+					{
+						var clickTrackingUrl:String = clickTracking.text();
 
-					clickTrackingUrl = StringUtils.filterPixel(clickTrackingUrl);
+						clickTrackingUrl = StringUtils.filterPixel(clickTrackingUrl);
 
-					_pixels.click.push(clickTrackingUrl);
+						_pixels.click.push(clickTrackingUrl);
+					}
 				}
 
 				var companions:XML = wrapper.Creatives..CompanionAds[0];
